@@ -1,0 +1,9 @@
+{
+	"name": "damg7370azdfspring25",
+	"location": "centralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "08973d34-f876-4adc-8b53-9717ec6f54c7",
+		"tenantId": "a8eec281-aaa3-4dae-ac9b-9a398b9215e7"
+	}
+}
