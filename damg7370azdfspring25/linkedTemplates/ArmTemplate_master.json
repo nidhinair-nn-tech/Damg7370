@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "damg7370azdfspring25"
 		},
+		"NYPD_Data_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'NYPD_Data'"
+		},
 		"Snowflake1_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'Snowflake1'"
@@ -22,6 +26,18 @@
 		"AzureKeyVault_LS_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://damg7370kvspring25.vault.azure.net/"
+		},
+		"NYPD_Data_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "NYPD_ARREST_DB"
+		},
+		"NYPD_Data_properties_typeProperties_role": {
+			"type": "string",
+			"defaultValue": "Assignment_Role"
+		},
+		"NYPD_Data_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "ns01701.canada-central.azure.snowflakecomputing.com"
 		},
 		"Snowflake1_properties_typeProperties_database": {
 			"type": "string",
@@ -62,6 +78,9 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"NYPD_Data_password": {
+						"value": "[parameters('NYPD_Data_password')]"
+					},
 					"Snowflake1_password": {
 						"value": "[parameters('Snowflake1_password')]"
 					},
@@ -73,6 +92,15 @@
 					},
 					"AzureKeyVault_LS_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault_LS_properties_typeProperties_baseUrl')]"
+					},
+					"NYPD_Data_properties_typeProperties_database": {
+						"value": "[parameters('NYPD_Data_properties_typeProperties_database')]"
+					},
+					"NYPD_Data_properties_typeProperties_role": {
+						"value": "[parameters('NYPD_Data_properties_typeProperties_role')]"
+					},
+					"NYPD_Data_properties_typeProperties_host": {
+						"value": "[parameters('NYPD_Data_properties_typeProperties_host')]"
 					},
 					"Snowflake1_properties_typeProperties_database": {
 						"value": "[parameters('Snowflake1_properties_typeProperties_database')]"

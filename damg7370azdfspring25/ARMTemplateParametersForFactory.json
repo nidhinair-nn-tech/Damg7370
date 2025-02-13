@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "damg7370azdfspring25"
 		},
+		"NYPD_Data_password": {
+			"value": ""
+		},
 		"Snowflake1_password": {
 			"value": ""
 		},
@@ -16,6 +19,15 @@
 		},
 		"AzureKeyVault_LS_properties_typeProperties_baseUrl": {
 			"value": "https://damg7370kvspring25.vault.azure.net/"
+		},
+		"NYPD_Data_properties_typeProperties_database": {
+			"value": "NYPD_ARREST_DB"
+		},
+		"NYPD_Data_properties_typeProperties_role": {
+			"value": "Assignment_Role"
+		},
+		"NYPD_Data_properties_typeProperties_host": {
+			"value": "ns01701.canada-central.azure.snowflakecomputing.com"
 		},
 		"Snowflake1_properties_typeProperties_database": {
 			"value": "ASSIGNMENT_DB"
