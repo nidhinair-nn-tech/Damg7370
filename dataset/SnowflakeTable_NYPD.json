@@ -1,0 +1,16 @@
+{
+	"name": "SnowflakeTable_NYPD",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "NYPD_Data",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [],
+		"typeProperties": {
+			"schema": "NYPD_SCHEMA",
+			"table": "NYPD_ARREST_STAGE"
+		}
+	}
+}
