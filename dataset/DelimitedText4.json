@@ -10,8 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "NYPD_ARREST.csv",
-				"fileSystem": "bronze"
+				"fileName": "NYPD_ARREST_DATASET.csv",
+				"fileSystem": "silver"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
