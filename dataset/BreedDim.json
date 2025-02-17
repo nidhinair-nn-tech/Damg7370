@@ -1,0 +1,16 @@
+{
+	"name": "BreedDim",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BreedDim",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [],
+		"typeProperties": {
+			"schema": "DAMG7370_SCHEMA",
+			"table": "BREED_DIM"
+		}
+	}
+}
