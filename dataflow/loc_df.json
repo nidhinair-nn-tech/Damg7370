@@ -69,9 +69,12 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     stageInsert: true,",
 				"     mapColumn(",
+				"          LOCATION_SK = SK_ID,",
 				"          CITY = city,",
 				"          STATE = state,",
-				"          DI_JOB_ID",
+				"          ZIP = zipcode,",
+				"          DI_JOB_ID,",
+				"          DI_CREATED_DT = DI_LOAD_DT",
 				"     )) ~> LoadLocDim"
 			]
 		}
