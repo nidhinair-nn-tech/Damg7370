@@ -16,7 +16,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "SnowflakeTable4",
+						"referenceName": "SnowflakeTable5",
 						"type": "DatasetReference"
 					},
 					"name": "LoadLocDim"
@@ -35,7 +35,7 @@
 				"     DI_JOB_ID as string (\"59\")",
 				"}",
 				"source(output(",
-				"          state_fips as string,",
+				"          state_fips as short,",
 				"          state as string,",
 				"          state_abbr as string,",
 				"          zipcode as string,",
@@ -67,7 +67,12 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     stageInsert: true) ~> LoadLocDim"
+				"     stageInsert: true,",
+				"     mapColumn(",
+				"          CITY = city,",
+				"          STATE = state,",
+				"          DI_JOB_ID",
+				"     )) ~> LoadLocDim"
 			]
 		}
 	}
