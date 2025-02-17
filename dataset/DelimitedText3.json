@@ -18,11 +18,6 @@
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": [
-			{
-				"name": "License_Issue_Date\tLicense_Number\tAnimals_Name\tSpecies\tPrimary_Breed\tSecondary_Breed\tZIP_Code",
-				"type": "String"
-			}
-		]
+		"schema": []
 	}
 }

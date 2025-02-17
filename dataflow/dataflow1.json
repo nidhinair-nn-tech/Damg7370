@@ -6,18 +6,30 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "SnowflakeTable2",
+						"referenceName": "DelimitedText3",
 						"type": "DatasetReference"
 					},
 					"name": "source1"
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "derivedColumn1",
+					"description": "Creating/updating the columns 'License_Issue_Date\tLicense_Number\tAnimals_Name Species\tPrimary_Breed\tSecondary_Breed\tZIP_Code'"
+				}
+			],
 			"scriptLines": [
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     format: 'table') ~> source1"
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 derive(License_Issue_Date = toDate(License_Issue_Date, 'MMMM dd yyyy', 'en-US'),",
+				"          Secondary_Breed = iifNull(Secondary_Breed, 'Unknown'),",
+				"          Zip_Code = lpad(toString(ZIP_Code), 5, '0'),",
+				"          Species = upper(Species),",
+				"          License_Number = toInteger(translate([License_Number], ' ', '')),",
+				"          Animals_Name = translate([Animals_Name], '()', ''),",
+				"          Job_Id = $Job_Id) ~> derivedColumn1"
 			]
 		}
 	}
