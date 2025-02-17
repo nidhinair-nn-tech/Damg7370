@@ -20,6 +20,11 @@
 						"type": "DataFlowReference",
 						"parameters": {
 							"job_id": "\"10\""
+						},
+						"datasetParameters": {
+							"source1": {
+								"Directory": "na"
+							}
 						}
 					},
 					"compute": {
