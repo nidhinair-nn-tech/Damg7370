@@ -22,10 +22,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": {
-					"value": "@dataset().Filename",
-					"type": "Expression"
-				},
+				"fileName": "Seattle_Pet_Licenses_new.tsv",
 				"fileSystem": "bronze"
 			},
 			"columnDelimiter": "\t",

@@ -23,7 +23,9 @@
 						},
 						"datasetParameters": {
 							"source1": {
-								"Directory": "na"
+								"Directory": "na",
+								"Filename": "Seattle_Pet_Licenses_new.tsv",
+								"FileDilemter": "/t"
 							}
 						}
 					},
