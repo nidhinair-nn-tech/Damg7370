@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "dataflow1",
+						"referenceName": "stg_df",
 						"type": "DataFlowReference",
 						"parameters": {
 							"job_id": "\"10\""

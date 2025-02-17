@@ -1,5 +1,5 @@
 {
-	"name": "dataflow1",
+	"name": "stg_df",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
