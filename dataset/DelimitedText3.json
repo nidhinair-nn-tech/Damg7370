@@ -5,6 +5,17 @@
 			"referenceName": "AzureDataLakeStorage_LS",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"Directory": {
+				"type": "string"
+			},
+			"Filename": {
+				"type": "string"
+			},
+			"FileDilemter": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
