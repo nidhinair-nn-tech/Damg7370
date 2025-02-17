@@ -48,7 +48,7 @@
 				"          Primary_Breed,",
 				"          Lic_Issue_Date,",
 				"          Sec_Breed,",
-				"          Zip_Code = derivedColumn1@Zip_Code,",
+				"          Zip_Code = {derivedColumn1@Zip_Code},",
 				"          Species_new,",
 				"          Lic_Number,",
 				"          Animal_Name,",

@@ -48,12 +48,7 @@
 				"inputs": [
 					{
 						"referenceName": "DelimitedText3",
-						"type": "DatasetReference",
-						"parameters": {
-							"Directory": "na",
-							"Filename": "Seattle_Pet_Licenses_new.tsv",
-							"FileDilemter": "\\t"
-						}
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
