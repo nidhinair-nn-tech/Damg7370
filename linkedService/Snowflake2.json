@@ -2,16 +2,18 @@
 	"name": "Snowflake2",
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
+		"description": "seattle_pet_lic_loading",
 		"annotations": [],
 		"type": "SnowflakeV2",
 		"typeProperties": {
 			"authenticationType": "Basic",
-			"accountIdentifier": "https://ns01701.canada-central.azure.snowflakecomputing.com",
+			"accountIdentifier": "ns01701.canada-central.azure",
 			"user": "DAMG7370",
 			"database": "ASSIGNMENT_DB",
 			"warehouse": "ASSIGNMENT_WH",
 			"role": "Assignment_ROLE",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDc4MjZCQzJCLUY4MzgtNDdCRi04RjYzLTlGNjU3NTlGRjM3Ql8yNDJkNmMxNS03ODExLTQ3ZDYtYjY1MC04Yzk0NjJiOGJlN2UiDQp9"
+			"host": "ns01701.canada-central.azure.snowflakecomputing.com",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDc4MjZCQzJCLUY4MzgtNDdCRi04RjYzLTlGNjU3NTlGRjM3Ql81ZDEyYjQ4NC1hNTJiLTQ5MDYtOGM0ZC1hN2ZlOTMyZWY5NmIiDQp9"
 		}
 	}
 }
