@@ -1,5 +1,5 @@
 {
-	"name": "dataflow1",
+	"name": "LoadFct",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -161,7 +161,7 @@
 				"          LOCATION_SK,",
 				"          BREED_SK,",
 				"          DATE_DIM_SK,",
-				"          MAXPETSK",
+				"          PET_LIC_SK = MAXPETSK",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> SELECTCOLUMN",
@@ -186,7 +186,15 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     stageInsert: true) ~> LoadToFCT"
+				"     stageInsert: true,",
+				"     mapColumn(",
+				"          PET_LIC_SK,",
+				"          DATE_SK = DATE_DIM_SK,",
+				"          LOCATION_SK,",
+				"          BREED_SK,",
+				"          DI_JOB_ID = JOB_EXC_ID,",
+				"          DI_LOAD_DT = JOB_EXC_DT",
+				"     )) ~> LoadToFCT"
 			]
 		}
 	}
