@@ -1,5 +1,5 @@
 {
-	"name": "pipeline2",
+	"name": "Load_Breed_Dim",
 	"properties": {
 		"activities": [
 			{
