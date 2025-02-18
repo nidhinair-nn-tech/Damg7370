@@ -45,7 +45,7 @@
 			],
 			"scriptLines": [
 				"parameters{",
-				"     DI_JOB_ID as string (\"10\")",
+				"     DI_JOB_ID as string",
 				"}",
 				"source(output(",
 				"          LIC_ISSUE_DATE as string,",
