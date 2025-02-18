@@ -1,0 +1,141 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "STG_SNOWFLAKE",
+						"type": "DatasetReference"
+					},
+					"name": "Stg"
+				},
+				{
+					"dataset": {
+						"referenceName": "SnowflakeTable5",
+						"type": "DatasetReference"
+					},
+					"name": "LocationDim"
+				},
+				{
+					"dataset": {
+						"referenceName": "BreedDim",
+						"type": "DatasetReference"
+					},
+					"name": "BreedDim"
+				},
+				{
+					"dataset": {
+						"referenceName": "date_dim",
+						"type": "DatasetReference"
+					},
+					"name": "DATEDIM"
+				},
+				{
+					"dataset": {
+						"referenceName": "FCTSnowflake",
+						"type": "DatasetReference"
+					},
+					"name": "MAXPETSK"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "joinLocation"
+				},
+				{
+					"name": "joinBreed"
+				},
+				{
+					"name": "joinDate"
+				},
+				{
+					"name": "CrossJoin"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          LIC_ISSUE_DATE as string,",
+				"          SECONDARY_BREED as string,",
+				"          ZIP_CODE as string,",
+				"          SPECIES as string,",
+				"          LICENSE_NUMBER as string,",
+				"          ANIMAL_NAME as string,",
+				"          JOB_EXC_ID as string,",
+				"          JOB_EXC_DT as string,",
+				"          PRIMARY_BREED as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table') ~> Stg",
+				"source(output(",
+				"          LOCATION_SK as string,",
+				"          CITY as string,",
+				"          STATE as string,",
+				"          ZIP as string,",
+				"          DI_JOB_ID as string,",
+				"          DI_CREATED_DT as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table') ~> LocationDim",
+				"source(output(",
+				"          BREED_SK as decimal(38,0),",
+				"          SPECIES as string,",
+				"          PRIMARY_BREED as string,",
+				"          SECONDARY_BREED as string,",
+				"          DI_JOB_ID as string,",
+				"          DI_CREATED_DT as date",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table') ~> BreedDim",
+				"source(output(",
+				"          DT as date,",
+				"          ABRV_DAY_NAME as string,",
+				"          MONTH_NAME as string,",
+				"          START_DAY_OF_MONTH as date,",
+				"          END_DAY_OF_MONTH as date,",
+				"          QUARTER_NUM as decimal(2,0),",
+				"          DAY_OF_WEEK as decimal(2,0),",
+				"          IS_WEEKEND as decimal(1,0),",
+				"          YEAR_NUM as decimal(4,0),",
+				"          MONTH_NUM as decimal(2,0),",
+				"          DAY_NUM as decimal(2,0),",
+				"          DATE_DIM_SK as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table') ~> DATEDIM",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     query: 'SELECT NVL(MAX(PET_LIC_SK),0) as MAXPETSK from DAMG7370_SCHEMA.PET_LIC_FCT',",
+				"     format: 'query') ~> MAXPETSK",
+				"Stg, LocationDim join(ZIP_CODE == ZIP,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> joinLocation",
+				"joinLocation, BreedDim join(Stg@SECONDARY_BREED == BreedDim@SECONDARY_BREED",
+				"     && Stg@PRIMARY_BREED == BreedDim@PRIMARY_BREED",
+				"     && Stg@SPECIES == BreedDim@SPECIES,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> joinBreed",
+				"joinBreed, DATEDIM join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> joinDate",
+				"joinDate, MAXPETSK join(1==1,",
+				"     joinType:'cross',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> CrossJoin"
+			]
+		}
+	}
+}
