@@ -1,5 +1,5 @@
 {
-	"name": "dataflow1",
+	"name": "breed_dim_df",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
