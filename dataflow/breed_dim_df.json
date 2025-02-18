@@ -97,7 +97,7 @@
 				"          SPECIES,",
 				"          PRIMARY_BREED,",
 				"          BREED_SK,",
-				"          {DI_JOB_ID },",
+				"          DI_JOB_ID = {DI_JOB_ID },",
 				"          DI_CREATED_DT",
 				"     )) ~> sink1"
 			]
