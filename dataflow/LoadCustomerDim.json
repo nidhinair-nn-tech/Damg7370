@@ -19,7 +19,15 @@
 					"name": "CustDim"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Customerdim",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "join1"
@@ -68,7 +76,31 @@
 				"     stepValue: 1L) ~> surrogateKey1",
 				"surrogateKey1 derive(customer_sk = MAXCUSTOMERSK+RowNum,",
 				"          DI_CreatedDt = currentDate(),",
-				"          pid = $DI_JOB_ID) ~> derivedColumn1"
+				"          pid = $DI_JOB_ID) ~> derivedColumn1",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          CUSTOMER_SK as decimal(38,0),",
+				"          CUSTOMER_ID as decimal(38,0),",
+				"          CUSTOMER_NAME as string,",
+				"          DI_CREATEDDT as timestamp,",
+				"          PID as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     stageInsert: true,",
+				"     mapColumn(",
+				"          CUSTOMER_SK = customer_sk,",
+				"          CUSTOMER_ID = CUSTOMERID,",
+				"          CUSTOMER_NAME = CUSTOMERNAME,",
+				"          DI_CREATEDDT = DI_CreatedDt,",
+				"          PID = pid",
+				"     )) ~> sink1"
 			]
 		}
 	}
