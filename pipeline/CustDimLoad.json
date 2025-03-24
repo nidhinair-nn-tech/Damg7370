@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "LoadCustomerDim",
+						"referenceName": "LoadCustomerDim2",
 						"type": "DataFlowReference",
 						"parameters": {
 							"DI_JOB_ID": {
