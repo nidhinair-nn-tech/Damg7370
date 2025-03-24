@@ -1,0 +1,65 @@
+{
+	"name": "SnowflakeTable6",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Snowflake3",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "INVOICEID",
+				"type": "NUMBER",
+				"precision": 30,
+				"scale": 0
+			},
+			{
+				"name": "CUSTOMERID",
+				"type": "NUMBER",
+				"precision": 30,
+				"scale": 0
+			},
+			{
+				"name": "INVOICEDATE",
+				"type": "DATE"
+			},
+			{
+				"name": "SHIPTO",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SHIPTOCITY",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SHIPTOCOUNTRY",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SALESPERSONID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SALESPERSONNAME",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "TOTALPRODUCTCOUNT",
+				"type": "NUMBER",
+				"precision": 10,
+				"scale": 4
+			},
+			{
+				"name": "TOTAL",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"schema": "DAMG7370_SCHEMA",
+			"table": "SALES_STG"
+		}
+	}
+}
