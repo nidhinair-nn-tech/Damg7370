@@ -6,13 +6,13 @@
 		"type": "SnowflakeV2",
 		"typeProperties": {
 			"authenticationType": "Basic",
-			"accountIdentifier": "ns01701.canada-central.azure.snowflakecomputing.com",
+			"accountIdentifier": "ns01701.canada-central.azure",
 			"user": "damg7370",
 			"database": "ASSIGNMENT_DB",
 			"warehouse": "Assignment_WH",
 			"role": "Assignment_ROLE",
 			"host": "ns01701.canada-central.azure.snowflakecomputing.com",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDc4MjZCQzJCLUY4MzgtNDdCRi04RjYzLTlGNjU3NTlGRjM3Ql9lNzA4Y2Q2Ni04NjEyLTRiZTEtODAzNi1jNzAyNTdhOWQwYTIiDQp9"
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDc4MjZCQzJCLUY4MzgtNDdCRi04RjYzLTlGNjU3NTlGRjM3Ql8xZDU0ODZhZi1mNGRhLTQ1ZmUtOThhYy1kNTdhYjZiOWRiNjIiDQp9"
 		}
 	}
 }
