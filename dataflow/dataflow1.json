@@ -1,0 +1,169 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "SalesStg",
+						"type": "DatasetReference"
+					},
+					"name": "SalesStg"
+				},
+				{
+					"dataset": {
+						"referenceName": "orphan",
+						"type": "DatasetReference"
+					},
+					"name": "OrphanInvoice"
+				},
+				{
+					"dataset": {
+						"referenceName": "SnowflakeTable8",
+						"type": "DatasetReference"
+					},
+					"name": "custDim"
+				},
+				{
+					"dataset": {
+						"referenceName": "SnowflakeTable9",
+						"type": "DatasetReference"
+					},
+					"name": "MaxInvoiceSk"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "orphan",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "MergeOrphan"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "split1"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "surrogateKey1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          INVOICEID as decimal(30,0),",
+				"          CUSTOMERID as decimal(30,0),",
+				"          INVOICEDATE as date,",
+				"          SHIPTO as string,",
+				"          SHIPTOCITY as string,",
+				"          SHIPTOCOUNTRY as string,",
+				"          SALESPERSONID as string,",
+				"          SALESPERSONNAME as string,",
+				"          TOTALPRODUCTCOUNT as decimal(10,4),",
+				"          TOTAL as decimal(38,0)",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table') ~> SalesStg",
+				"source(output(",
+				"          INVOICE_SK as decimal(30,0),",
+				"          INVOICE_ID as decimal(30,0),",
+				"          CUSTOMER_SK as decimal(30,0),",
+				"          INVOICE_DT as date,",
+				"          TOTAL_PRODUCT_CNT as decimal(30,0),",
+				"          TOTAL_PRODUCT_COST as decimal(30,0),",
+				"          DI_CREATEDDT as timestamp,",
+				"          PID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table') ~> OrphanInvoice",
+				"source(output(",
+				"          CUSTOMER_SK as decimal(38,0),",
+				"          CUSTOMER_ID as decimal(38,0),",
+				"          CUSTOMER_NAME as string,",
+				"          DI_CREATEDDT as timestamp,",
+				"          PID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table') ~> custDim",
+				"source(output(",
+				"          MAXCUSTOMERSK as decimal(30,0)",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     query: 'SELECT NVL(MAX(customer_SK),0) as MaxCustomerSK from damg7370_schema.fct_invoice',",
+				"     format: 'query') ~> MaxInvoiceSk",
+				"SalesStg, OrphanInvoice union(byName: true)~> MergeOrphan",
+				"MergeOrphan, custDim join(CUSTOMERID == CUSTOMER_ID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 split(isNull(CUSTOMER_ID),",
+				"     disjoint: false) ~> split1@(CustomerIdNotFound, CustomerIdFound)",
+				"split1@CustomerIdFound select(mapColumn(",
+				"          INVOICEID,",
+				"          CUSTOMERID,",
+				"          INVOICEDATE,",
+				"          SHIPTO,",
+				"          SHIPTOCITY,",
+				"          SHIPTOCOUNTRY,",
+				"          SALESPERSONID,",
+				"          SALESPERSONNAME,",
+				"          TOTALPRODUCTCOUNT,",
+				"          TOTAL,",
+				"          INVOICE_SK,",
+				"          INVOICE_ID,",
+				"          CUSTOMER_SK = split1@CustomerIdFound@CUSTOMER_SK,",
+				"          INVOICE_DT,",
+				"          TOTAL_PRODUCT_CNT,",
+				"          TOTAL_PRODUCT_COST,",
+				"          DI_CREATEDDT = split1@CustomerIdFound@DI_CREATEDDT,",
+				"          PID = split1@CustomerIdFound@PID,",
+				"          CUSTOMER_SK = split1@CustomerIdFound@CUSTOMER_SK,",
+				"          CUSTOMER_ID,",
+				"          CUSTOMER_NAME,",
+				"          DI_CREATEDDT = split1@CustomerIdFound@DI_CREATEDDT,",
+				"          PID = split1@CustomerIdFound@PID",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 keyGenerate(output(RowNum as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> surrogateKey1",
+				"split1@CustomerIdNotFound sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          INVOICE_SK as decimal(30,0),",
+				"          INVOICE_ID as decimal(30,0),",
+				"          CUSTOMER_SK as decimal(30,0),",
+				"          INVOICE_DT as date,",
+				"          TOTAL_PRODUCT_CNT as decimal(30,0),",
+				"          TOTAL_PRODUCT_COST as decimal(30,0),",
+				"          DI_CREATEDDT as timestamp,",
+				"          PID as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     stageInsert: true) ~> sink1"
+			]
+		}
+	}
+}
