@@ -1,9 +1,9 @@
 {
-	"name": "pipeline1",
+	"name": "CustDimLoad",
 	"properties": {
 		"activities": [
 			{
-				"name": "Data flow1",
+				"name": "CustDimLoad",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
