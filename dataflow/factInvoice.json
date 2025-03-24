@@ -36,17 +36,17 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "orphan",
-						"type": "DatasetReference"
-					},
-					"name": "sink1"
-				},
-				{
-					"dataset": {
 						"referenceName": "loadInvoice",
 						"type": "DatasetReference"
 					},
 					"name": "loadFctInvoice"
+				},
+				{
+					"dataset": {
+						"referenceName": "SnowflakeTable10",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
 				}
 			],
 			"transformations": [
@@ -152,35 +152,6 @@
 				"join2 derive(invoice_sk = MAXCUSTOMERSK+RowNum,",
 				"          DI_CreatedDt = currentDate(),",
 				"          pid = $Di_Job_Id) ~> derivedColumn1",
-				"split1@CustomerIdNotFound sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     input(",
-				"          INVOICE_SK as decimal(30,0),",
-				"          INVOICE_ID as decimal(30,0),",
-				"          CUSTOMER_SK as decimal(30,0),",
-				"          INVOICE_DT as date,",
-				"          TOTAL_PRODUCT_CNT as decimal(30,0),",
-				"          TOTAL_PRODUCT_COST as decimal(30,0),",
-				"          DI_CREATEDDT as timestamp,",
-				"          PID as string",
-				"     ),",
-				"     deletable:false,",
-				"     insertable:true,",
-				"     updateable:false,",
-				"     upsertable:false,",
-				"     format: 'table',",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     stageInsert: true,",
-				"     mapColumn(",
-				"          INVOICE_ID = INVOICEID,",
-				"          CUSTOMER_SK,",
-				"          INVOICE_DT = INVOICEDATE,",
-				"          TOTAL_PRODUCT_CNT = TOTALPRODUCTCOUNT,",
-				"          TOTAL_PRODUCT_COST = TOTAL,",
-				"          DI_CREATEDDT,",
-				"          PID",
-				"     )) ~> sink1",
 				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
@@ -210,7 +181,41 @@
 				"          TOTAL_PRODUCT_COST = TOTAL,",
 				"          DI_CREATEDDT = DI_CreatedDt,",
 				"          PID = pid",
-				"     )) ~> loadFctInvoice"
+				"     )) ~> loadFctInvoice",
+				"split1@CustomerIdNotFound sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          INVOICEID as decimal(30,0),",
+				"          CUSTOMERID as decimal(30,0),",
+				"          INVOICEDATE as date,",
+				"          SHIPTO as string,",
+				"          SHIPTOCITY as string,",
+				"          SHIPTOCOUNTRY as string,",
+				"          SALESPERSONID as string,",
+				"          SALESPERSONNAME as string,",
+				"          TOTALPRODUCTCOUNT as decimal(10,4),",
+				"          TOTAL as decimal(38,0)",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     stageInsert: true,",
+				"     mapColumn(",
+				"          INVOICEID,",
+				"          CUSTOMERID,",
+				"          INVOICEDATE,",
+				"          SHIPTO,",
+				"          SHIPTOCITY,",
+				"          SHIPTOCOUNTRY,",
+				"          SALESPERSONID,",
+				"          SALESPERSONNAME,",
+				"          TOTALPRODUCTCOUNT,",
+				"          TOTAL",
+				"     )) ~> sink1"
 			]
 		}
 	}
