@@ -1,0 +1,31 @@
+{
+	"name": "SnowflakeTable7",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Snowflake3",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "CUSTOMERID",
+				"type": "NUMBER",
+				"precision": 30,
+				"scale": 0
+			},
+			{
+				"name": "CUSTOMERNAME",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "BILLTO",
+				"type": "VARCHAR"
+			}
+		],
+		"typeProperties": {
+			"schema": "DAMG7370_SCHEMA",
+			"table": "CUSTOMER_STG"
+		}
+	}
+}
