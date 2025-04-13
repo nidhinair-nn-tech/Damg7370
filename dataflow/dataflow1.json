@@ -13,14 +13,35 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
-				"          {Inspection ID     DBA Name     AKA Name     License #     Facility Type     Risk     Address     City     State     Zip     Inspection Date     Inspection Type     Results     Violations     Latitude     Longitude     Location} as string",
+				"          {Inspection ID} as string,",
+				"          {DBA Name} as string,",
+				"          {AKA Name} as string,",
+				"          {License #} as string,",
+				"          {Facility Type} as string,",
+				"          Risk as string,",
+				"          Address as string,",
+				"          City as string,",
+				"          State as string,",
+				"          Zip as string,",
+				"          {Inspection Date} as string,",
+				"          {Inspection Type} as string,",
+				"          Results as string,",
+				"          Violations as string,",
+				"          Latitude as string,",
+				"          Longitude as string,",
+				"          Location as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> source1"
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 derive() ~> derivedColumn1"
 			]
 		}
 	}

@@ -20,7 +20,71 @@
 		},
 		"schema": [
 			{
-				"name": "Inspection ID\tDBA Name\tAKA Name\tLicense #\tFacility Type\tRisk\tAddress\tCity\tState\tZip\tInspection Date\tInspection Type\tResults\tViolations\tLatitude\tLongitude\tLocation",
+				"name": "Inspection ID",
+				"type": "String"
+			},
+			{
+				"name": "DBA Name",
+				"type": "String"
+			},
+			{
+				"name": "AKA Name",
+				"type": "String"
+			},
+			{
+				"name": "License #",
+				"type": "String"
+			},
+			{
+				"name": "Facility Type",
+				"type": "String"
+			},
+			{
+				"name": "Risk",
+				"type": "String"
+			},
+			{
+				"name": "Address",
+				"type": "String"
+			},
+			{
+				"name": "City",
+				"type": "String"
+			},
+			{
+				"name": "State",
+				"type": "String"
+			},
+			{
+				"name": "Zip",
+				"type": "String"
+			},
+			{
+				"name": "Inspection Date",
+				"type": "String"
+			},
+			{
+				"name": "Inspection Type",
+				"type": "String"
+			},
+			{
+				"name": "Results",
+				"type": "String"
+			},
+			{
+				"name": "Violations",
+				"type": "String"
+			},
+			{
+				"name": "Latitude",
+				"type": "String"
+			},
+			{
+				"name": "Longitude",
+				"type": "String"
+			},
+			{
+				"name": "Location",
 				"type": "String"
 			}
 		]
